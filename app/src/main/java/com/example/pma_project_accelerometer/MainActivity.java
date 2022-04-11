@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
     //StepCounterVariable
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     mTimerRunning = false;
                     LeaderboardActivity.addToResultsList(stepCount);
                     stepCount = 0;
+                    Toast.makeText(MainActivity.this,"Your score has been uploaded to the leaderboards",Toast.LENGTH_SHORT).show();
                 }
 
             }.start();
