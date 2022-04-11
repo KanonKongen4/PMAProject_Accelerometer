@@ -50,11 +50,4 @@ public class MainActivity extends AppCompatActivity {
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
     };
-    final Handler handler = new Handler(Looper.getMainLooper());
-handler.postDelayed(new Runnable() {
-        @Override
-        public void run() {
-            //Do something after 100ms
-        }
-    }, 100);
 }
