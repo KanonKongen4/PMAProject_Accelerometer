@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         //Stepcounter
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        mySteps = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        mySteps = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
         //Text
         stepCountText = findViewById(R.id.stepCountText);
-        if (mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
-            mySteps = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR) != null) {
+            mySteps = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
             isCounterSensorPresent = true;
         } else {
             stepCountText.setText(("Counter Sensor is not present"));
@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public void onClick(View view) {
                 if (!mTimerRunning) {
                     startTimer();
+                    mTimerRunning = true;
+                    stepCountText.setText("0");
                 }
             }
         });
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        if(sensorEvent.sensor == mySteps){
+        if(mTimerRunning == true){
             //stepCount = (int) sensorEvent.values[0];
             stepCountText.setText(String.valueOf(stepCount));
             stepCount++;
@@ -144,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume(){
         super.onResume();
-        if(mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)!= null){
+        if(mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)!= null){
             mSensorManager.registerListener(this,mySteps,SensorManager.SENSOR_DELAY_FASTEST);
         }
 
@@ -153,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onPause() {
         super.onPause();
-        if(mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)!= null){
+        if(mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)!= null){
             mSensorManager.unregisterListener(this,mySteps);
         }
     }
