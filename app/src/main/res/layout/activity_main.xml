@@ -7,13 +7,35 @@
 android:background="@color/background"
     tools:context=".MainActivity">
 
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#ECEFBE"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="51dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="STEP COUNTER"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.16000003" />
+
     <Button
         android:id="@+id/timerStartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="308dp"
         android:backgroundTint="@color/btn_primary"
-        android:text="Button"
+        android:text="Start Timer"
+        app:layout_constraintBottom_toTopOf="@+id/btn_leaderboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,24 +54,71 @@ android:background="@color/background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.778" />
 
+    <View
+        android:id="@+id/StepCountBox"
+        android:layout_width="143dp"
+        android:layout_height="73dp"
+        android:background="#ECEFBE"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/timerText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        app:layout_constraintVertical_bias="0.4" />
+
     <TextView
         android:id="@+id/stepCountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="StepCountText"
+        android:background="#00000000"
+        android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/timerStartButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/TimerBox"
+        android:layout_width="143dp"
+        android:layout_height="73dp"
+        android:background="#ECEFBE"
+        app:layout_constraintBottom_toTopOf="@+id/timerStartButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StepCountBox"
+        app:layout_constraintVertical_bias="0.32999998" />
+
     <TextView
         android:id="@+id/timerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#00000000"
         android:text="TimerText"
         app:layout_constraintBottom_toTopOf="@+id/timerStartButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stepCountText" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="STEPS TAKEN"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/stepCountText"
+        app:layout_constraintEnd_toEndOf="@+id/StepCountBox"
+        app:layout_constraintStart_toStartOf="@+id/StepCountBox"
+        app:layout_constraintTop_toTopOf="@+id/StepCountBox" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TIME LEFT"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/timerText"
+        app:layout_constraintEnd_toEndOf="@+id/TimerBox"
+        app:layout_constraintStart_toStartOf="@+id/TimerBox"
+        app:layout_constraintTop_toTopOf="@+id/TimerBox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
