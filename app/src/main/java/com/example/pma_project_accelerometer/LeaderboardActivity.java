@@ -34,18 +34,10 @@ public class LeaderboardActivity extends AppCompatActivity {
             }
         });
 
-        //addTestIntegers();
         sortIntegerList(listOfResults);
         results.setText(createResultsString());
     }
 
-private void addTestIntegers(){
-        listOfResults.add(3);
-    listOfResults.add(15);
-    listOfResults.add(189);
-    listOfResults.add(1);
-    listOfResults.add(4);
-}
     private ArrayList<Integer> sortIntegerList(ArrayList<Integer> listToSort){
         Collections.sort(listToSort);
         Collections.reverse(listToSort);
