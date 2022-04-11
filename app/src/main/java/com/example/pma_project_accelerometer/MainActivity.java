@@ -21,34 +21,22 @@ public class MainActivity extends AppCompatActivity {
     private Sensor accelerometer;
 
     private TextView messageView;
+    private int steps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-    messageView = findViewById(R.id.messageView);
-        messageView.setText(":C!");
-    }
-    private SensorEventListener listener = new SensorEventListener() {
-        @Override
-        public void onSensorChanged(SensorEvent event) {
-// The acceleration may be negative, so take their absolute value
-            float xValue = Math.abs(event.values[0]);
-            float yValue = Math.abs(event.values[1]);
-            float zValue = Math.abs(event.values[2]);
-            if (xValue > 10 || yValue > 10|| zValue > 10) {
-// message for user
-            messageView.setText("wuhuuu");
+        //-Finding a View and setting the text.
+        messageView = findViewById(R.id.messageView);
+        messageView.setText("XD!");
 
-            //Whhhat!
-            }
-        }
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        }
-    };
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+
+
+
+    }
+
 }
