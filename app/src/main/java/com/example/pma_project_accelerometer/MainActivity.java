@@ -14,6 +14,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Looper;
 import android.view.View;
 import android.view.WindowManager;
@@ -32,6 +33,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private boolean isCounterSensorPresent;
     int stepCount = 0;
 
+    //TIMER UI + variables
+    private TextView timerText;
+    private Button timerStartButton;
+
+    private static final long START_TIME_IN_MILLIS = 60000;
+    private CountDownTimer mCountDownTimer;
+    private boolean mTimerRunning;
+    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+
 
 
 
@@ -43,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         //Gå til Leaderboards
         btn_leaderboard = findViewById(R.id.btn_leaderboard);
-
         btn_leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,12 +61,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-
-        if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){ //ask for permission
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED) { //ask for permission
             requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
         }
-
         //Random linje som indisk mand sagde jeg skulle adde?
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         //Stepcounter
@@ -65,17 +72,60 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mySteps = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         //Text
         stepCountText = findViewById(R.id.stepCountText);
-
-        if(mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)!= null) {
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
             mySteps = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
             isCounterSensorPresent = true;
-        }
-        else {
+        } else {
             stepCountText.setText(("Counter Sensor is not present"));
             isCounterSensorPresent = false;
         }
 
+        //TIMER UI
+        timerStartButton = findViewById(R.id.timerStartButton);
+        timerText = findViewById(R.id.timerText);
+
+        //TIMER BUTTON ON CLICK
+        timerStartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mTimerRunning) {
+                    startTimer();
+                }
+            }
+        });
+        updateCountDownText();
+
     }
+
+        private void startTimer() {
+            mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    mTimeLeftInMillis = millisUntilFinished;
+                    updateCountDownText();
+                }
+                @Override
+                public void onFinish() {
+                    mTimerRunning = false;
+
+                }
+
+            }.start();
+
+            mTimerRunning = true;
+        }
+
+
+
+        private void updateCountDownText(){
+        int seconds = (int) mTimeLeftInMillis/1000;
+        timerText.setText(String.valueOf(seconds));
+        }
+
+
+
+
+
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {

@@ -8,7 +8,7 @@ android:background="@color/background"
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/timerStartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="260dp"
@@ -36,10 +36,20 @@ android:background="@color/background"
         android:id="@+id/stepCountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:text="StepCountText"
+        app:layout_constraintBottom_toTopOf="@+id/timerStartButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TimerText"
+        app:layout_constraintBottom_toTopOf="@+id/timerStartButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stepCountText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
