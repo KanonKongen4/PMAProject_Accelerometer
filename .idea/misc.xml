@@ -3,13 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< Updated upstream
-        <entry key="..\:/Users/krill/Documents/GitHub/PMAProject_Accelerometer/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-=======
         <entry key="..\:/Users/Kanon/AndroidStudioProjects/PMAProject_Accelerometer/app/src/main/res/layout/activity_leaderboard.xml" value="0.125" />
         <entry key="..\:/Users/Kanon/AndroidStudioProjects/PMAProject_Accelerometer/app/src/main/res/layout/activity_main.xml" value="0.165" />
-        <entry key="..\:/Users/krill/Documents/GitHub/PMAProject_Accelerometer/app/src/main/res/layout/activity_main.xml" value="0.2259963768115942" />
->>>>>>> Stashed changes
       </map>
     </option>
   </component>
