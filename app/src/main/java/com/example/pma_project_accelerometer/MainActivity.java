@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
     //StepCounterVariable
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView timerText;
     private Button timerStartButton;
 
-    private static final long START_TIME_IN_MILLIS = 6000;
+    private static final long START_TIME_IN_MILLIS = 30000;
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
@@ -104,8 +105,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 @Override
                 public void onFinish() {
                     mTimerRunning = false;
-                    LeaderboardActivity.addToResultsList(666);
-                                    }
+                    LeaderboardActivity.addToResultsList(stepCount);
+                    stepCount = 0;
+                    Toast.makeText(MainActivity.this,"Your score has been uploaded to the leaderboards",Toast.LENGTH_SHORT).show();
+                }
 
             }.start();
 
@@ -128,8 +131,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent sensorEvent) {
         if(mTimerRunning == true){
             //stepCount = (int) sensorEvent.values[0];
-            stepCountText.setText(String.valueOf(stepCount));
             stepCount++;
+            stepCountText.setText(String.valueOf(stepCount));
         }
     }
 
