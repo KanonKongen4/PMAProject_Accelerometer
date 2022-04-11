@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private boolean isCounterSensorPresent;
     int stepCount = 0;
 
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +59,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             stepCountText.setText(("Counter Sensor is not present"));
             isCounterSensorPresent = false;
         }
+
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if(sensorEvent.sensor == mySteps){
-            stepCount = (int) sensorEvent.values[0];
+            //stepCount = (int) sensorEvent.values[0];
+            stepCount++;
             stepCountText.setText(String.valueOf(stepCount));
         }
     }
@@ -75,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onResume(){
         super.onResume();
         if(mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)!= null){
-            mSensorManager.registerListener(this,mySteps,SensorManager.SENSOR_DELAY_NORMAL);
+            mSensorManager.registerListener(this,mySteps,SensorManager.SENSOR_DELAY_FASTEST);
         }
 
     }
