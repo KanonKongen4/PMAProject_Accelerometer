@@ -6,19 +6,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LeaderboardActivity extends AppCompatActivity {
 
     private Button btn_main;
+    private TextView results;
+    private ArrayList<Integer> listOfResults = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
 
-        //Gå til Leaderboards
+        results = findViewById(R.id.results);
         btn_main = findViewById(R.id.btn_back);
 
+        //Gå til Leaderboards
         btn_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -26,5 +34,23 @@ public class LeaderboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Testing
+        addTestIntegers();
+       sortIntegerList(listOfResults);
+        results.setText("hello: " + listOfResults);
+    }
+private void addTestIntegers(){
+        listOfResults.add(3);
+    listOfResults.add(15);
+    listOfResults.add(189);
+    listOfResults.add(1);
+    listOfResults.add(4);
+}
+
+    private ArrayList<Integer> sortIntegerList(ArrayList<Integer> listToSort){
+        Collections.sort(listToSort);
+        Collections.reverse(listToSort);
+        return listToSort;
     }
 }

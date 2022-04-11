@@ -21,7 +21,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
         android:layout_marginTop="24dp"
-        android:text="LEADERBOARD"
+        android:text="@string/leaderboard"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/results"
+        android:layout_width="390dp"
+        android:layout_height="433dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="148dp"
+        android:text="results here!"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
