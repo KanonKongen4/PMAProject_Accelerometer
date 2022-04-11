@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent sensorEvent) {
         if(sensorEvent.sensor == mySteps){
             //stepCount = (int) sensorEvent.values[0];
-            stepCount++;
             stepCountText.setText(String.valueOf(stepCount));
+            stepCount++;
         }
     }
 
