@@ -10,13 +10,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class LeaderboardActivity extends AppCompatActivity {
 
     private Button btn_main;
     private TextView results;
-    private ArrayList<Integer> listOfResults = new ArrayList<>();
+    private static ArrayList<Integer> listOfResults = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +34,9 @@ public class LeaderboardActivity extends AppCompatActivity {
             }
         });
 
-        //Testing
-        addTestIntegers();
+        //addTestIntegers();
         sortIntegerList(listOfResults);
-        results.setText(markupResults());
+        results.setText(createResultsString());
     }
 
 private void addTestIntegers(){
@@ -54,11 +52,16 @@ private void addTestIntegers(){
         return listToSort;
     }
 
-    private String markupResults(){
+    private String createResultsString(){
         String stringToPrint = "";
         for(int i = 0; i<listOfResults.size();i++){
         stringToPrint += Integer.toString(i+1) + " : " + Integer.toString(listOfResults.get(i)) + "\n";
         }
+        if (listOfResults.size() == 0) stringToPrint += "No results yet";
     return  stringToPrint;
+    }
+
+    public static void addToResultsList(Integer resultToAdd){
+        listOfResults.add(resultToAdd);
     }
 }

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
@@ -15,14 +14,10 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Looper;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.logging.Handler;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
     //StepCounterVariable
@@ -37,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView timerText;
     private Button timerStartButton;
 
-    private static final long START_TIME_IN_MILLIS = 60000;
+    private static final long START_TIME_IN_MILLIS = 6000;
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
@@ -107,8 +102,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 @Override
                 public void onFinish() {
                     mTimerRunning = false;
-
-                }
+                    LeaderboardActivity.addToResultsList(666);
+                                    }
 
             }.start();
 
