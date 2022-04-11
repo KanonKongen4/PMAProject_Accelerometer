@@ -28,10 +28,10 @@
 
     <TextView
         android:id="@+id/results"
-        android:layout_width="390dp"
-        android:layout_height="433dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="148dp"
+        android:layout_width="295dp"
+        android:layout_height="438dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="136dp"
         android:text="results here!"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"

@@ -14,7 +14,7 @@ public class Timer {
     public Timer(int timerDuration){
         this.timerDuration = timerDuration;
 
-        timerText = findViewById(R.id.timerText);
+     //   timerText = findViewById(R.id.timerText);
 
     }
 }

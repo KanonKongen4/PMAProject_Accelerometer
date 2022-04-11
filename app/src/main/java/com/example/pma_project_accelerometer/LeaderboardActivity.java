@@ -37,9 +37,10 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         //Testing
         addTestIntegers();
-       sortIntegerList(listOfResults);
-        results.setText("hello: " + listOfResults);
+        sortIntegerList(listOfResults);
+        results.setText(markupResults());
     }
+
 private void addTestIntegers(){
         listOfResults.add(3);
     listOfResults.add(15);
@@ -47,10 +48,17 @@ private void addTestIntegers(){
     listOfResults.add(1);
     listOfResults.add(4);
 }
-
     private ArrayList<Integer> sortIntegerList(ArrayList<Integer> listToSort){
         Collections.sort(listToSort);
         Collections.reverse(listToSort);
         return listToSort;
+    }
+
+    private String markupResults(){
+        String stringToPrint = "";
+        for(int i = 0; i<listOfResults.size();i++){
+        stringToPrint += Integer.toString(i+1) + " : " + Integer.toString(listOfResults.get(i)) + "\n";
+        }
+    return  stringToPrint;
     }
 }
