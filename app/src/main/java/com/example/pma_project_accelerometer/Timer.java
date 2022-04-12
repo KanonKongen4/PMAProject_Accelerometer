@@ -9,20 +9,19 @@ import android.widget.Toast;
 
 public class Timer extends CountDownTimer {
 
-    private static final long START_TIME_IN_MILLIS = 30000;
     private long mTimeLeftInMillis;
     private boolean mTimerRunning;
     private Context context;
 
     public void resetTimer(){
-        mTimeLeftInMillis = START_TIME_IN_MILLIS;
+        mTimeLeftInMillis = 30000;
     }
 
     public Timer(Context context) {
         super(30000,1000);
         this.context = context;
 
-        mTimeLeftInMillis = START_TIME_IN_MILLIS;
+        mTimeLeftInMillis = 30000;
     }
 
     public long getmTimeLeftInMillis() {
