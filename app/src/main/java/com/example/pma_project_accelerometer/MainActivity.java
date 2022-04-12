@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public static TextView timerText;
     private Button timerStartButton;
     Timer timer = new Timer(MainActivity.this);
-    private CountDownTimer mCountDownTimer;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public void onClick(View view) {
                 if (timer.ismTimerRunning() == false) {
                     timer.startTimer(30000);
-                    timer.setmTimerRunning(true);
+
                     stepCountText.setText("0");
                 }
             }

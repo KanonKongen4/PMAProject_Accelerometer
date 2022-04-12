@@ -42,7 +42,7 @@ public class Timer extends CountDownTimer {
 
     public void startTimer(long millisUntilFinished){
         onTick(millisUntilFinished);
-        //onFinish();
+        setmTimerRunning(true);
         start();
     }
 
