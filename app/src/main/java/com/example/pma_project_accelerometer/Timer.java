@@ -1,5 +1,6 @@
 package com.example.pma_project_accelerometer;
 
+import android.content.Context;
 import android.os.CountDownTimer;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,13 +12,15 @@ public class Timer extends CountDownTimer {
     private static final long START_TIME_IN_MILLIS = 30000;
     private long mTimeLeftInMillis;
     private boolean mTimerRunning;
+    private Context context;
 
     public void resetTimer(){
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
     }
 
-    public Timer() {
+    public Timer(Context context) {
         super(30000,1000);
+        this.context = context;
 
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
     }
@@ -40,7 +43,7 @@ public class Timer extends CountDownTimer {
 
     public void startTimer(long millisUntilFinished){
         onTick(millisUntilFinished);
-        onFinish();
+        //onFinish();
         start();
     }
 
@@ -57,7 +60,7 @@ public class Timer extends CountDownTimer {
         setmTimerRunning(false);
         LeaderboardActivity.addToResultsList(MainActivity.stepCount);
         MainActivity.stepCount = 0;
-        //Toast.makeText(MainActivity.this,"Your score has been uploaded to the leaderboards",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"Your score has been uploaded to the leaderboards",Toast.LENGTH_SHORT).show();
         resetTimer();
     }
 

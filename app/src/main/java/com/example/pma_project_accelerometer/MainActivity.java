@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     //TIMER UI + variables
     public static TextView timerText;
     private Button timerStartButton;
-    Timer timer = new Timer();
+    Timer timer = new Timer(MainActivity.this);
     private CountDownTimer mCountDownTimer;
 
 
@@ -47,8 +47,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         btn_leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LeaderboardActivity.class);
-                startActivity(intent);
+                if(timer.ismTimerRunning() == false){
+                    Intent intent = new Intent(MainActivity.this, LeaderboardActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"Please wait until the timer is done",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         if (ContextCompat.checkSelfPermission(this,
