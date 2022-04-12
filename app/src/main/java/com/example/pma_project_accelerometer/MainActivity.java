@@ -27,18 +27,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView stepCountText;
     private Button btn_leaderboard;
     private boolean isCounterSensorPresent;
-    int stepCount = 0;
+    public static int stepCount = 0;
 
     //TIMER UI + variables
-    private TextView timerText;
+    public static TextView timerText;
     private Button timerStartButton;
-
-    private static final long START_TIME_IN_MILLIS = 30000;
+    Timer timer = new Timer();
     private CountDownTimer mCountDownTimer;
-    private boolean mTimerRunning;
-    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
-
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -56,12 +51,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 startActivity(intent);
             }
         });
-
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED) { //ask for permission
             requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
         }
-        //Random linje som indisk mand sagde jeg skulle adde?
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         //Stepcounter
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -84,50 +77,31 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         timerStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!mTimerRunning) {
-                    startTimer();
-                    mTimerRunning = true;
+                if (timer.ismTimerRunning() == false) {
+                    timer.startTimer(30000);
+                    timer.setmTimerRunning(true);
                     stepCountText.setText("0");
                 }
             }
         });
-        updateCountDownText();
     }
-        private void startTimer() {
-            mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    mTimeLeftInMillis = millisUntilFinished;
-                    updateCountDownText();
-                }
-                @Override
-                public void onFinish() {
-                    mTimerRunning = false;
-                    LeaderboardActivity.addToResultsList(stepCount);
-                    stepCount = 0;
-                    Toast.makeText(MainActivity.this,"Your score has been uploaded to the leaderboards",Toast.LENGTH_SHORT).show();
-                    mTimeLeftInMillis = START_TIME_IN_MILLIS;
-                }
-
-            }.start();
-
-            mTimerRunning = true;
-        }
-
-        private void updateCountDownText(){
-        int seconds = (int) mTimeLeftInMillis/1000;
-        timerText.setText(String.valueOf(seconds));
-        }
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        if(mTimerRunning == true){
-            //stepCount = (int) sensorEvent.values[0];
+        if(timer.ismTimerRunning() == true){
             stepCount++;
             stepCountText.setText(String.valueOf(stepCount));
         }
     }
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)!= null){
+            mSensorManager.registerListener(this,mySteps,SensorManager.SENSOR_DELAY_FASTEST);
+        }
 
     }
 
