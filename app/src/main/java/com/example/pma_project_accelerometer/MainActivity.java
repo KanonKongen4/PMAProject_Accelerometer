@@ -92,9 +92,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
         updateCountDownText();
-
     }
-
         private void startTimer() {
             mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
                 @Override
@@ -108,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     LeaderboardActivity.addToResultsList(stepCount);
                     stepCount = 0;
                     Toast.makeText(MainActivity.this,"Your score has been uploaded to the leaderboards",Toast.LENGTH_SHORT).show();
+                    mTimeLeftInMillis = START_TIME_IN_MILLIS;
                 }
 
             }.start();
@@ -115,18 +114,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             mTimerRunning = true;
         }
 
-
-
         private void updateCountDownText(){
         int seconds = (int) mTimeLeftInMillis/1000;
         timerText.setText(String.valueOf(seconds));
         }
-
-
-
-
-
-
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if(mTimerRunning == true){
@@ -135,27 +126,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             stepCountText.setText(String.valueOf(stepCount));
         }
     }
-
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        if(mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)!= null){
-            mSensorManager.registerListener(this,mySteps,SensorManager.SENSOR_DELAY_FASTEST);
-        }
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if(mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)!= null){
-            mSensorManager.unregisterListener(this,mySteps);
-        }
     }
 
 }
